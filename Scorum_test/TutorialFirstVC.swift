@@ -7,20 +7,23 @@
 //
 
 import UIKit
-import CoreLocation
 
-class TutorialFirstVC: UIViewController, CLLocationManagerDelegate {
+class TutorialFirstVC: UIViewController {
     
-    let locationManager = CLLocationManager()
-    
+    @IBOutlet weak var nextButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.delegate = self
-        
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateUI), name: Notification.Name("AuthorisationSuccess"), object: nil)
+    }
+    
+    @objc func updateUI() {
+        if LocationManager.shared.authorised() {
+            UserDefaults.standard.set(false, forKey: "user_have_seen_tutorial")
+            
+            nextButton.isHidden = false
+        }
     }
     
 }

@@ -11,10 +11,12 @@ import UIKit
 
 class TutorialSecondVC: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBAction func okButtonTapped(_ sender: UIButton) {
         
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let weatherVC = storyBoard.instantiateViewController(withIdentifier: "WeatherVC") as! WeatherVC
         
+        self.present(weatherVC, animated: true, completion: nil)
+
     }
-    
 }

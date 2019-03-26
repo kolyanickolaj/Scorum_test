@@ -13,7 +13,11 @@ class LoadingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.disappear), name: Notification.Name("WeatherFetched"), object: nil)
+    }
+    
+    @objc func disappear() {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
